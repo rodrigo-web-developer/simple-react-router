@@ -45,8 +45,6 @@ const registerTypeParameter = (name: string, regex: RegExp) => {
     registeredTypes[name] = new RegExp("(" + regex.source + ")");
 }
 
-
-
 let pathDictionary = {} as any;
 
 let matchers = [] as any[];
@@ -82,13 +80,20 @@ const getComponentAlgorithm = (path: string) => {
 }
 
 const getComponentFromRoute = (path = window.location.pathname): Route => {
-    const result = pathDictionary[path];
-    if (!result) {
+    let result = pathDictionary[path];
 
+    if (!result) {
+        result = getComponentAlgorithm(path);
     }
+    console.log("retornando ", path, result);
     return result;
 }
 
 export default pathMatchPattern;
 
-export { getParams, generateMatcher, registerTypeParameter };
+export {
+    getParams,
+    generateMatcher,
+    registerTypeParameter,
+    getComponentFromRoute
+};
