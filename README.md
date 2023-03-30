@@ -16,3 +16,4 @@ So I decide to make my own router with simple and easy to use components, easy c
 - [ ] Custom 404 error page
 - [ ] Nested routing
 - [ ] Navigation functions and components
+- [ ] Location changed custom events
