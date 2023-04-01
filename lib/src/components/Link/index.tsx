@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react"
+import React, { PropsWithChildren, MouseEvent } from "react"
 import { useNavigation } from "../../hooks";
 
 interface LinkProps extends PropsWithChildren {

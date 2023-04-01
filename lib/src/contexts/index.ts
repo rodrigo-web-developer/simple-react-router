@@ -10,7 +10,7 @@ interface RouterContext {
 const RouterContext = createContext({} as RouterContext);
 
 interface NavigationContext {
-    navigateTo: (e: Event, path: string) => void,
+    navigateTo: (e: React.UIEvent<Element>, path: string) => void,
     path: string
 };
 

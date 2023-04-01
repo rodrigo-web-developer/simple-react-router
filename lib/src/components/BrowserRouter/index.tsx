@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback, useEffect, useState } from "react";
+import { PropsWithChildren, UIEvent, useCallback, useEffect, useState } from "react";
 import { RouterContext, NavigationContext } from "../../contexts";
 import { useNavigation } from "../../hooks";
 import navigationService from "../../services/NavigationService";
@@ -17,7 +17,7 @@ function Navigator({ children }: PropsWithChildren) {
         setPath(navigationService.pathname);
     });
 
-    const navigateTo = useCallback((event: Event, relativePath: string) => {
+    const navigateTo = useCallback((event: UIEvent<Element>, relativePath: string) => {
         navigationService.navigateTo(event, relativePath);
     }, [path]);
 
