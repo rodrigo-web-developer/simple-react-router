@@ -5,21 +5,18 @@ import navigationService from "../../services/NavigationService";
 import service, { getComponentFromRoute } from "../../services/PathMatchingService";
 import { Routes } from "../../types";
 
-interface BrowserRouterProps {
+interface BrowserRouterProps extends PropsWithChildren {
     routes: Routes
 }
-
 
 function Navigator({ children }: PropsWithChildren) {
     const [path, setPath] = useState(navigationService.pathname);
 
-    const navigateTo = useCallback((path: string) => {
-        const newPath = path.startsWith("/") ? path :
-            [navigationService.pathname, path].join("/");
-
-        navigationService.navigateTo(new Event("path changed"), path);
-        setPath(newPath);
-    }, []);
+    const navigateTo = useCallback((event: Event, relativePath: string) => {
+        navigationService.navigateTo(event, relativePath);
+        console.log("changingPath: ", navigationService.pathname);
+        setPath(navigationService.pathname);
+    }, [path]);
 
     return <NavigationContext.Provider value={{
         navigateTo,
@@ -29,9 +26,17 @@ function Navigator({ children }: PropsWithChildren) {
     </NavigationContext.Provider>
 }
 
-export default function BrowserRouter({ routes }: BrowserRouterProps) {
-    const [notFound, setNotFound] = useState<React.ReactElement>();
+export default function BrowserRouter({ routes, children }: BrowserRouterProps) {
+    return (<Navigator>
+        <BrowserRouterWrapper routes={routes}>
+            {children}
+        </BrowserRouterWrapper>
+    </Navigator>);
+}
 
+function BrowserRouterWrapper({ routes, children }: BrowserRouterProps) {
+    const [notFound, setNotFound] = useState<React.ReactElement>();
+    const [component, setComponent] = useState<React.ReactElement>();
     const navigator = useNavigation();
 
     const setErrorPage = useCallback((e: React.ReactElement) => {
@@ -41,20 +46,24 @@ export default function BrowserRouter({ routes }: BrowserRouterProps) {
     const renderComponent = useCallback(() => {
         const currentRouteComponent = getComponentFromRoute(window.location.pathname);
         if (!currentRouteComponent) {
-            return notFound || <></>;
+            return setComponent(notFound || <></>);
         }
-        return currentRouteComponent.component;
-    }, [navigator]);
+        return setComponent(currentRouteComponent.component);
+    }, []);
 
     useEffect(() => {
         service.configure(routes);
     }, [routes]);
 
-    return (<Navigator>
-        <RouterContext.Provider value={{
-            setErrorPage,
-            routes,
-            renderComponent
-        }}></RouterContext.Provider>
-    </Navigator>);
+    useEffect(() => {
+        renderComponent();
+    }, [navigator.path]);
+
+    return (<RouterContext.Provider value={{
+        setErrorPage,
+        routes,
+        component
+    }}>
+        {children}
+    </RouterContext.Provider>);
 }

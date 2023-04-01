@@ -3,14 +3,14 @@ import { Routes } from "../types";
 
 interface RouterContext {
     routes: Routes,
-    renderComponent: () => React.ReactElement,
+    component?: React.ReactElement,
     setErrorPage: (c: React.ReactElement) => void
 };
 
 const RouterContext = createContext({} as RouterContext);
 
 interface NavigationContext {
-    navigateTo: (path: string) => void,
+    navigateTo: (e: Event, path: string) => void,
     path: string
 };
 

@@ -85,7 +85,6 @@ const getComponentFromRoute = (path = window.location.pathname): Route => {
     if (!result) {
         result = getComponentAlgorithm(path);
     }
-    console.log("retornando ", path, result);
     return result;
 }
 
