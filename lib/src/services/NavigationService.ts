@@ -1,6 +1,6 @@
 
 const navigationService = {
-    _listeners: [] as Function[],
+    _listeners: {} as any,
     get pathname() {
         return window.location.pathname;
     },
@@ -9,13 +9,13 @@ const navigationService = {
         window.history.pushState("", "", path); // troco apenas a url sem redirecionar
         navigationService.handleOnChange(event);
     },
-    onChangeRoute: function (action: Function) {
-        this._listeners.push(action);
+    onChangeRoute: function (handlerName: string, action: Function) {
+        this._listeners[handlerName] = action;
     },
     handleOnChange: function (e: Event) {
-        this._listeners.forEach(
-            handle => handle(e)
-        )
+        for (const handle of Object.keys(this._listeners)) {
+            this._listeners[handle](e);
+        }
     }
 };
 

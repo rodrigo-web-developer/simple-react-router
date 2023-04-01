@@ -12,10 +12,13 @@ interface BrowserRouterProps extends PropsWithChildren {
 function Navigator({ children }: PropsWithChildren) {
     const [path, setPath] = useState(navigationService.pathname);
 
+    navigationService.onChangeRoute("DefaultNavigator", () => {
+        console.log("PATH CHANGED: ", navigationService.pathname);
+        setPath(navigationService.pathname);
+    });
+
     const navigateTo = useCallback((event: Event, relativePath: string) => {
         navigationService.navigateTo(event, relativePath);
-        console.log("changingPath: ", navigationService.pathname);
-        setPath(navigationService.pathname);
     }, [path]);
 
     return <NavigationContext.Provider value={{
