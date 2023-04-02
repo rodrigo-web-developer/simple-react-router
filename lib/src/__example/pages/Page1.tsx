@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "../../components/Link";
 
-export default function MyFirstPage() {
+export default function MyFirstPage(props) {
+    console.log("PageProps", props)
     return (<>
+        <h1>{props.test}</h1>
         <h1>
             HEY, THIS IS MY 1st PAGE
         </h1>

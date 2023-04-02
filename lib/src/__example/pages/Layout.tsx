@@ -16,7 +16,7 @@ export default function Layout() {
             </ul>
         </nav>
         <div className="content">
-            <RenderComponent/>
+            <RenderComponent test="Prop teste"/>
         </div>
     </div>)
 }
