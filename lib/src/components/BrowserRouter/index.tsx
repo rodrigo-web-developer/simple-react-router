@@ -71,8 +71,11 @@ function BrowserRouterWrapper({ routes, children }: BrowserRouterProps) {
     </RouterContext.Provider>);
 }
 
-
-export function RenderComponent(props: PropsWithChildren) {
-    const { component } = useRouter();
-    return <>{component}</>;
+//TODO: add type to props
+export function RenderComponent(props) {
+    console.log("Props", props);
+    let { component } = useRouter();
+    const componentToRender = {...component, props};
+    
+    return <>{componentToRender}</>;
 }
