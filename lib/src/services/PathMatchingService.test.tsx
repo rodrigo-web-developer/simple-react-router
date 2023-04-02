@@ -1,7 +1,7 @@
 import React from "react";
 import service, { generateMatcher, getComponentFromRoute, getParams, registerTypeParameter } from "./PathMatchingService";
 
-it("configure() must create correct object with routes", () => {
+it("must create correct object with routes", () => {
     const component1 = <h1>TEST</h1>;
     const routes = [{
         path: "route1",
@@ -26,7 +26,7 @@ it("configure() must create correct object with routes", () => {
     ].sort())
 });
 
-it("getParams should return array of params for simple route", () => {
+it("should return array of params for simple route", () => {
     const route1 = "/app/test";
     const route2 = "/app/:id";
     const route3 = "/app/:id(guid)/:op";
@@ -41,7 +41,7 @@ it("getParams should return array of params for simple route", () => {
 });
 
 
-it("generateMatcher should return regexp for path matching on simple route", () => {
+it("should return regexp for path matching on simple route", () => {
     const route1 = "/app/test";
     const route2 = "/app/:id";
     const route3 = "/app/:id(numero)";
@@ -78,7 +78,7 @@ it("returns first match component by path", () => {
     const result2 = getComponentFromRoute("/route/nest1");
     const resultRoot = getComponentFromRoute("/route");
 
-    expect(result1.component).toBe(component3);
-    expect(result2.component).toBe(component2);
-    expect(resultRoot.component).toBe(component1);
+    expect(result1!.component).toBe(component3);
+    expect(result2!.component).toBe(component2);
+    expect(resultRoot!.component).toBe(component1);
 });

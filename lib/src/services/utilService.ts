@@ -24,11 +24,12 @@ const matchersSequence = {
 const sortAlgorithm = function (a: RouteMatcher, b: RouteMatcher): number {
     let result = 0;
     let priorityA = a.priority || 0, priorityB = b.priority || 0;
+
     if (a.type !== b.type) {
-        result = matchersSequence[a.type] - matchersSequence[b.type];
+        result = matchersSequence[b.type] - matchersSequence[a.type];
     }
     else {
-        result = priorityA - priorityB;
+        result = priorityB - priorityA;
     }
     return result;
 }

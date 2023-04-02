@@ -4,7 +4,8 @@ import { classifyPath, sortAlgorithm } from "./utilService";
 const matchRegex = /:[\w\-][a-z0-9]+([(][\w\-][a-z0-9]+[)])?/;
 
 const registeredTypes = {
-    "any": /([\w\-\+%]+)/
+    "any": /([\w\-\+%]+)/,
+    "number": /([0-9]+)/
 } as TypeParameterDictionary;
 
 const combine = (...params: string[]) => {
