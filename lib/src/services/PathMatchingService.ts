@@ -14,7 +14,7 @@ const combine = (...params: string[]) => {
 
 const generateMatcher = (fullpath: string) => {
     const pathParams = getParams(fullpath);
-    let matcher = "^" + fullpath + "$";
+    let matcher = "^" + fullpath + "\/?$";
     pathParams.forEach((p) => {
         matcher = matcher.replace(matchRegex, (registeredTypes[p.type] || registeredTypes["any"]).source);
     });

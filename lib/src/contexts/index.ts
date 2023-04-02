@@ -1,10 +1,10 @@
-import { createContext } from "react";
+import React, { PropsWithChildren, createContext } from "react";
 import { Routes } from "../types";
 
 interface RouterContext {
     routes: Routes,
-    component?: React.ReactElement,
-    setErrorPage: (c: React.ReactElement) => void
+    component?: JSX.Element,
+    setErrorPage: (c: JSX.Element) => void
 };
 
 const RouterContext = createContext({} as RouterContext);

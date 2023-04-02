@@ -1,6 +1,6 @@
 import { PropsWithChildren, UIEvent, useCallback, useEffect, useState } from "react";
 import { RouterContext, NavigationContext } from "../../contexts";
-import { useNavigation } from "../../hooks";
+import { useNavigation, useRouter } from "../../hooks";
 import navigationService from "../../services/NavigationService";
 import service, { getComponentFromRoute } from "../../services/PathMatchingService";
 import { Routes } from "../../types";
@@ -69,4 +69,10 @@ function BrowserRouterWrapper({ routes, children }: BrowserRouterProps) {
     }}>
         {children}
     </RouterContext.Provider>);
+}
+
+
+export function RenderComponent(props: PropsWithChildren) {
+    const { component } = useRouter();
+    return <>{component}</>;
 }

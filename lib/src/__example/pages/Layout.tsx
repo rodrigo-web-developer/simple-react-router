@@ -1,11 +1,9 @@
-import { ReactElement, useEffect, useState } from "react";
+import React from "react";
 import Link from "../../components/Link";
-import { useRouter } from "../../hooks";
 import "../styles/app.css";
+import { RenderComponent } from "../../components/BrowserRouter";
 
-export default function Layout(){
-    const router = useRouter();
-
+export default function Layout() {
     return (<div className="layout">
         <nav>
             <ul>
@@ -17,8 +15,8 @@ export default function Layout(){
                 <li><Link to="/rota/teste">PAGINA SEM REGEX</Link></li>
             </ul>
         </nav>
-        <div>
-            {router.component}
+        <div className="content">
+            <RenderComponent/>
         </div>
     </div>)
 }

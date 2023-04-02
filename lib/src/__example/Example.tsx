@@ -10,9 +10,15 @@ import Regex1 from "./components/Regex1";
 import Regex2 from "./components/Regex2";
 import Regex3 from "./components/Regex3";
 
+import Subpage1 from "./pages/subpages/Subpage1";
+
 const myRoutes = [{
     component: <Page1></Page1>,
-    path: "pagina1"
+    path: "pagina1",
+    children: [{
+        path: "subpage", //create /pagina1/subpage
+        component: <Subpage1></Subpage1> 
+    }]
 }, {
     component: <Page2></Page2>,
     path: "pagina2"

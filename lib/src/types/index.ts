@@ -16,7 +16,7 @@ export interface MatchersDictionary {
 
 export interface RouteBase {
     path: string;
-    component: React.ReactElement,
+    component: JSX.Element,
     priority?: number
 }
 

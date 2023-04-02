@@ -3,7 +3,7 @@ div.layout {
 }
 
 div.layout nav {
-    flex: 180px;
+    flex: 280px;
     flex-grow: 0;
     padding-right: 10px;
     height: 100%;
