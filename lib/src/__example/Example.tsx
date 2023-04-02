@@ -11,6 +11,10 @@ import Regex2 from "./components/Regex2";
 import Regex3 from "./components/Regex3";
 
 import Subpage1 from "./pages/subpages/Subpage1";
+import pathMatchPattern from "../services/PathMatchingService";
+import { registerTypeParameter } from "../services/PathMatchingService";
+
+registerTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);
 
 const myRoutes = [{
     component: <Page1></Page1>,
@@ -35,6 +39,9 @@ const myRoutes = [{
 }, {
     component: <Regex3></Regex3>,
     path: "rota/teste"
+}, {
+    component: <Regex3></Regex3>,
+    path: "product/:test(guid)"
 }] as Routes;
 
 export default function Example() {
