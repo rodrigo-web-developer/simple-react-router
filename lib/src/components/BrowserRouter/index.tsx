@@ -44,8 +44,7 @@ function BrowserRouterWrapper({ routes, notFoundPage, children }: BrowserRouterP
 
     const renderComponent = useCallback(() => {
         const currentRouteComponent = getComponentFromRoute(window.location.pathname);
-        console.log("window.location", window.location);
-        console.log("current route component", currentRouteComponent);
+
         if (!currentRouteComponent) {
             return setComponent(notFoundPage || <></>);
         }

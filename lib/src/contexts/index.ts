@@ -1,9 +1,9 @@
-import React, { PropsWithChildren, createContext } from "react";
+import React, { PropsWithChildren, ReactNode, createContext } from "react";
 import { Routes } from "../types";
 
 interface RouterContext {
     routes: Routes,
-    component?: JSX.Element
+    component?: React.ReactElement | JSX.Element | ReactNode | React.FC
 };
 
 const RouterContext = createContext({} as RouterContext);
