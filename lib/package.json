@@ -1,7 +1,7 @@
 {
   "name": "simple-react-router",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1-beta",
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",

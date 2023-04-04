@@ -4,3 +4,5 @@ export { default as Link } from "./components/Link";
 export * from "./contexts";
 export * from "./hooks";
 export * from "./types";
+export * from "./services/PathMatchingService";
+export * from "./services/NavigationService";
