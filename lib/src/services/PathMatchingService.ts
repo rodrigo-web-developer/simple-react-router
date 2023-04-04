@@ -43,7 +43,7 @@ const getParams = (fullpath: string) => {
     return paramsResult;
 }
 
-const registerTypeParameter = (name: string, regex: RegExp) => {
+const registerPathTypeParameter = (name: string, regex: RegExp) => {
     registeredTypes[name] = new RegExp("(" + regex.source + ")");
 }
 
@@ -96,6 +96,6 @@ export default pathMatchPattern;
 export {
     getParams,
     generateMatcher,
-    registerTypeParameter,
+    registerPathTypeParameter,
     getComponentFromRoute
 };
