@@ -3,8 +3,7 @@ import { Routes } from "../types";
 
 interface RouterContext {
     routes: Routes,
-    component?: JSX.Element,
-    setErrorPage: (c: JSX.Element) => void
+    component?: JSX.Element
 };
 
 const RouterContext = createContext({} as RouterContext);

@@ -42,10 +42,6 @@ function BrowserRouterWrapper({ routes, children }: BrowserRouterProps) {
     const [component, setComponent] = useState<React.ReactElement>();
     const navigator = useNavigation();
 
-    const setErrorPage = useCallback((e: React.ReactElement) => {
-        setNotFound(e);
-    }, []);
-
     const renderComponent = useCallback(() => {
         const currentRouteComponent = getComponentFromRoute(window.location.pathname);
         if (!currentRouteComponent) {
@@ -63,7 +59,6 @@ function BrowserRouterWrapper({ routes, children }: BrowserRouterProps) {
     }, [navigator.path]);
 
     return (<RouterContext.Provider value={{
-        setErrorPage,
         routes,
         component
     }}>
