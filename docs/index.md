@@ -59,9 +59,9 @@ To create you own type RegExp validation you need to register at the root of you
 Imagine you want to add a GUID (with hiphen) validation:
 
 ```ts
-import { registerTypeParameter } from "simple-react-router";
+import { registerPathTypeParameter } from "simple-react-router";
 
-registerTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);
+registerPathTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);
 
 const myRoutes = [{
     component: <Page1></Page1>,
@@ -87,17 +87,17 @@ The Simple React Router will not magically resolves the conflicts because there 
 So lets the developer decides for the library:
 
 ```ts
-import { registerTypeParameter } from "simple-react-router";
+import { registerPathTypeParameter } from "simple-react-router";
 
-registerTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);
+registerPathTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);
 
 const myRoutes = [{
     component: <Page3></Page3>,
-    priority: 1, 
+    priority: 1, // add to the top of matching test
     path: "product/:id(guid)" // use the name of type parameter registered
 }, {
     component: <Page3></Page3>,
-    path: "product/:description" // use the name of type parameter registered
+    path: "product/:description" 
 }] as Routes;
 
 export default myRoutes;
