@@ -11,7 +11,6 @@ import Regex2 from "./components/Regex2";
 import Regex3 from "./components/Regex3";
 
 import Subpage1 from "./pages/subpages/Subpage1";
-import pathMatchPattern from "../services/PathMatchingService";
 import { registerPathTypeParameter } from "../services/PathMatchingService";
 
 registerPathTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);

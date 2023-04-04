@@ -1,5 +1,5 @@
 import React from "react";
-import service, { generateMatcher, getComponentFromRoute, getParams, registerTypeParameter } from "./PathMatchingService";
+import service, { generateMatcher, getComponentFromRoute, getParams, registerPathTypeParameter } from "./PathMatchingService";
 
 it("must create correct object with routes", () => {
     const component1 = <h1>TEST</h1>;
@@ -46,7 +46,7 @@ it("should return regexp for path matching on simple route", () => {
     const route2 = "/app/:id";
     const route3 = "/app/:id(numero)";
 
-    registerTypeParameter("numero", /[0-9]+/)
+    registerPathTypeParameter("numero", /[0-9]+/)
     const response1 = generateMatcher(route1);
     const response2 = generateMatcher(route2);
     const response3 = generateMatcher(route3);
