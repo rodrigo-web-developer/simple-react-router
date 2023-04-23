@@ -1,5 +1,6 @@
 {
   "name": "simple-react-navigator",
+  "description": "A lightweight and easy to use ReactJS router",
   "author": {
     "email": "x10rodrigo@gmail.com",
     "name": "Rodrigo G Rodrigues",
