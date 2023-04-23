@@ -17,7 +17,12 @@ export interface MatchersDictionary {
 export interface RouteBase {
     path: string;
     component: JSX.Element,
-    priority?: number
+    priority?: number,
+    params?: {
+        name: string,
+        type: string,
+        index: number
+    }[]
 }
 
 export interface RouteMatcher extends RouteBase {
@@ -25,4 +30,6 @@ export interface RouteMatcher extends RouteBase {
     type: "normal" | "regexp" | "wildcard"
 }
 
-export type { Routes };
+interface StringDictionary { [key: string]: string }
+
+export type { Routes, StringDictionary };
