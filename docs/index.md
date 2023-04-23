@@ -2,6 +2,8 @@
 
 ## Overview
 
+The Simple React Router is a lightweight and fast library for ReactJS, it allows developers to create routing for their applications without the need for a complex router.
+
 ## Basic Usage
 
 Install package with `npm install` or `yarn add`.
@@ -107,6 +109,25 @@ Higher priority means the regexp will be tested first, so you can just sorts you
 
 
 ## Hooks
+
+Use the `useRouter()` hook to get data of the current route like: component, path params and route list.
+
+### Get pathParams
+
+Imagine you have the `/route/:id` route and you want to get the `id` parameter value, you can just call the hook and use the `pathParams` attribute:
+
+```ts
+import { useRouter } from "simple-react-router";
+
+export default function MyThirdPage() {
+    const {pathParams} = useRouter();
+    return (<>
+        <h1>
+            My ID: {pathParams["id"]}
+        </h1>
+    </>)
+}
+```
 
 ## RenderComponent with layout
 
