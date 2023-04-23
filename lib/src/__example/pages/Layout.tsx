@@ -13,6 +13,8 @@ export default function Layout() {
                 <li><Link to="/rota/textonormal">PAGINA COM REGEX</Link></li>
                 <li><Link to="/rota/123456">PAGINA COM REGEX</Link></li>
                 <li><Link to="/rota/teste">PAGINA SEM REGEX</Link></li>
+                <li><Link to="/404">PAGINA SEM REGISTRO</Link></li>
+
             </ul>
         </nav>
         <div className="content">

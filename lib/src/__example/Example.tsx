@@ -12,10 +12,15 @@ import Regex3 from "./components/Regex3";
 
 import Subpage1 from "./pages/subpages/Subpage1";
 import { registerPathTypeParameter } from "../services/PathMatchingService";
+import NotFound from "./pages/NotFound";
+import Home from "./pages/Home";
 
 registerPathTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);
 
 const myRoutes = [{
+    component: <Home/>,
+    path: "",
+},{
     component: <Page1></Page1>,
     path: "pagina1",
     children: [{
@@ -45,7 +50,7 @@ const myRoutes = [{
 
 export default function Example() {
     return (
-        <BrowserRouter routes={myRoutes}>
+        <BrowserRouter routes={myRoutes} notFoundPage={<NotFound/>}>
             <Layout></Layout>
         </BrowserRouter>
     )

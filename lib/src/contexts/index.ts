@@ -1,9 +1,9 @@
-import React, { createContext } from "react";
+import React, { PropsWithChildren, ReactNode, createContext } from "react";
 import { Routes, StringDictionary } from "../types";
 
 interface RouterContext {
     routes: Routes,
-    component?: JSX.Element,
+    component?: React.ReactElement | JSX.Element | ReactNode | React.FC,
     pathParams: StringDictionary
 };
 
@@ -15,6 +15,5 @@ interface NavigationContext {
 };
 
 const NavigationContext = createContext({} as NavigationContext);
-
 
 export { RouterContext, NavigationContext };
