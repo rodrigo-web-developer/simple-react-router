@@ -14,7 +14,6 @@ function Navigator({ children }: PropsWithChildren) {
     const [path, setPath] = useState(navigationService.pathname);
 
     navigationService.onChangeRoute("DefaultNavigator", () => {
-        console.log("PATH CHANGED: ", navigationService.pathname);
         setPath(navigationService.pathname);
     });
 
@@ -40,7 +39,6 @@ export default function BrowserRouter({ routes, notFoundPage, children }: Browse
 
 function BrowserRouterWrapper({ routes, notFoundPage, children }: BrowserRouterProps) {
     const [component, setComponent] = useState<React.ReactElement | JSX.Element | ReactNode | React.FC >();
-    const [notFound, setNotFound] = useState<React.ReactElement>();
     const [currentRoute, setCurrentRoute] = useState<RouteMatcher>();
     const [pathParams, setPathParams] = useState<StringDictionary>({});
 
@@ -51,7 +49,7 @@ function BrowserRouterWrapper({ routes, notFoundPage, children }: BrowserRouterP
 
         if (!currentRouteComponent) {
             setPathParams({});
-            return setComponent(notFound || <></>);
+            return setComponent(notFoundPage || <></>);
         }
         const params = getParamsValues(currentRouteComponent);
         setCurrentRoute(currentRouteComponent);
