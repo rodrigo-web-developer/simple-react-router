@@ -1,6 +1,10 @@
 {
   "name": "simple-react-router",
-  "private": true,
+  "author": {
+    "email": "rodrigo.050198@hotmail.com",
+    "name": "Rodrigo G Rodrigues",
+    "url": "https://github.com/rodrigo-web-developer/"
+  },
   "version": "0.0.1-beta",
   "type": "module",
   "main": "./dist/cjs/index.js",
