@@ -2,8 +2,8 @@ import { PropsWithChildren, UIEvent, useCallback, useEffect, useState } from "re
 import { RouterContext, NavigationContext } from "../../contexts";
 import { useNavigation, useRouter } from "../../hooks";
 import navigationService from "../../services/NavigationService";
-import service, { getComponentFromRoute } from "../../services/PathMatchingService";
-import { Routes } from "../../types";
+import service, { getComponentFromRoute, getParamsValues } from "../../services/PathMatchingService";
+import { RouteMatcher, Routes, StringDictionary } from "../../types";
 
 interface BrowserRouterProps extends PropsWithChildren {
     routes: Routes
@@ -40,13 +40,19 @@ export default function BrowserRouter({ routes, children }: BrowserRouterProps) 
 function BrowserRouterWrapper({ routes, children }: BrowserRouterProps) {
     const [notFound, setNotFound] = useState<React.ReactElement>();
     const [component, setComponent] = useState<React.ReactElement>();
+    const [currentRoute, setCurrentRoute] = useState<RouteMatcher>();
+    const [pathParams, setPathParams] = useState<StringDictionary>({});
     const navigator = useNavigation();
 
     const renderComponent = useCallback(() => {
         const currentRouteComponent = getComponentFromRoute(window.location.pathname);
         if (!currentRouteComponent) {
+            setPathParams({});
             return setComponent(notFound || <></>);
         }
+        const params = getParamsValues(currentRouteComponent);
+        setCurrentRoute(currentRouteComponent);
+        setPathParams(params);
         return setComponent(currentRouteComponent.component);
     }, []);
 
@@ -60,7 +66,8 @@ function BrowserRouterWrapper({ routes, children }: BrowserRouterProps) {
 
     return (<RouterContext.Provider value={{
         routes,
-        component
+        component,
+        pathParams
     }}>
         {children}
     </RouterContext.Provider>);
