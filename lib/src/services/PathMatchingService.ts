@@ -1,4 +1,4 @@
-import { MatchersDictionary, Route, RouteBase, RouteMatcher, Routes, TypeParameterDictionary } from "../types";
+import { MatchersDictionary, Route, RouteBase, RouteMatcher, Routes, StringDictionary, TypeParameterDictionary } from "../types";
 import { classifyPath, sortAlgorithm } from "./utilService";
 
 const matchRegex = /:[\w\-][a-z0-9]+([(][\w\-][a-z0-9]+[)])?/;
@@ -7,6 +7,7 @@ const registeredTypes = {
     "any": /([\w\-\+%]+)/,
     "number": /([0-9]+)/
 } as TypeParameterDictionary;
+
 
 const combine = (...params: string[]) => {
     return params.join("/");
@@ -21,12 +22,12 @@ const generateMatcher = (fullpath: string) => {
     return new RegExp(matcher);
 }
 
-
 const getParams = (fullpath: string) => {
     const pathParams = fullpath.match(/:[\w\-][a-z0-9]+([(][\w\-][a-z0-9]+[)])?/g);
     const paramsResult = [] as any[];
     if (pathParams) {
-        pathParams.map((v, i) => {
+        // console.log(fullpath, pathParams);
+        pathParams.forEach((v, i) => {
             let _ = v.match(/^:([\w\-]*[a-z0-9])([(]([\w\-]*[a-z0-9])[)])?/);
             if (_) {
                 let name = _[1];
@@ -39,8 +40,20 @@ const getParams = (fullpath: string) => {
                 paramsResult.push(param);
             }
         });
+        // console.log("Results: ", paramsResult);
     }
     return paramsResult;
+}
+
+const getParamsValues = function (route: RouteMatcher, fullpath: string = window.location.pathname): StringDictionary {
+    const dict = {} as StringDictionary;
+    if (route.params.length) {
+        const paramsValues = route.matcher.exec(fullpath);
+        route.params.forEach(p => {
+            dict[p.name] = paramsValues[p.index + 1];
+        });
+    }
+    return dict;
 }
 
 const registerPathTypeParameter = (name: string, regex: RegExp) => {
@@ -58,19 +71,20 @@ const pathMatchPattern = {
     configure: function (routes: Routes) {
         pathDictionary = {};
         const mapRecursive = (route: Route, parent = "") => {
-            let parentPath = combine(parent || "", route.path);
+            let fullPath = combine(parent || "", route.path);
             if (route.children) {
                 route.children.forEach((child) =>
-                    mapRecursive(child, parentPath));
+                    mapRecursive(child, fullPath));
             }
-            pathDictionary[parentPath] = {
+            pathDictionary[fullPath] = {
                 component: route.component,
                 path: route.path,
-                type: classifyPath(parentPath),
+                type: classifyPath(fullPath),
                 priority: route.priority || 0,
-                matcher: generateMatcher(parentPath)
+                matcher: generateMatcher(fullPath),
+                params: getParams(fullPath)
             };
-            matchers.push(pathDictionary[parentPath]);
+            matchers.push(pathDictionary[fullPath]);
         }
         routes.forEach((r) => mapRecursive(r));
         matchers.sort(sortAlgorithm); // order by descending
@@ -82,8 +96,8 @@ const getComponentAlgorithm = (path: string) => {
     return matchers.find(e => path.match(e.matcher));
 }
 
-const getComponentFromRoute = (path = window.location.pathname): RouteBase | undefined => {
-    let result = pathDictionary[path] as (RouteBase | undefined);
+const getComponentFromRoute = (path = window.location.pathname): RouteMatcher | undefined => {
+    let result = pathDictionary[path];
 
     if (!result) {
         result = getComponentAlgorithm(path);
@@ -97,5 +111,6 @@ export {
     getParams,
     generateMatcher,
     registerPathTypeParameter,
-    getComponentFromRoute
+    getComponentFromRoute,
+    getParamsValues
 };

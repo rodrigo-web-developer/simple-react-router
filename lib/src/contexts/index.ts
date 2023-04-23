@@ -1,9 +1,10 @@
-import React, { PropsWithChildren, createContext } from "react";
-import { Routes } from "../types";
+import React, { createContext } from "react";
+import { Routes, StringDictionary } from "../types";
 
 interface RouterContext {
     routes: Routes,
-    component?: JSX.Element
+    component?: JSX.Element,
+    pathParams: StringDictionary
 };
 
 const RouterContext = createContext({} as RouterContext);
