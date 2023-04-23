@@ -1,4 +1,4 @@
-# SIMPLE REACT ROUTER
+# SIMPLE REACT ROUTING
 
 ## Overview
 
