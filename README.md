@@ -1,4 +1,4 @@
-# simple-react-router
+# simple-react-routing
 
 ## Introduction
 
