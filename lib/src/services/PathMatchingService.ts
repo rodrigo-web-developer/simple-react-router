@@ -61,6 +61,7 @@ const registerPathTypeParameter = (name: string, regex: RegExp) => {
 }
 
 let pathDictionary = {} as MatchersDictionary;
+let pathNameDictionary = {} as MatchersDictionary;
 
 let matchers = [] as RouteMatcher[];
 
@@ -70,26 +71,32 @@ const pathMatchPattern = {
     },
     configure: function (routes: Routes) {
         pathDictionary = {};
+        pathNameDictionary = {};
         const mapRecursive = (route: Route, parent = "") => {
             let fullPath = combine(parent || "", route.path);
             if (route.children) {
                 route.children.forEach((child) =>
                     mapRecursive(child, fullPath));
             }
-            pathDictionary[fullPath] = {
+            route.name = route.name || fullPath;
+            if (pathNameDictionary[route.name]) {
+                throw new Error("You already defined a route with the same name: " + route.name);
+            }
+            pathNameDictionary[route.name] = pathDictionary[fullPath] = {
                 component: route.component,
+                name: route.name,
                 path: route.path,
                 type: classifyPath(fullPath),
                 priority: route.priority || 0,
                 matcher: generateMatcher(fullPath),
-                params: getParams(fullPath)
+                params: getParams(fullPath),
+                _fullpath: fullPath
             };
             matchers.push(pathDictionary[fullPath]);
         }
         routes.forEach((r) => mapRecursive(r));
         matchers.sort(sortAlgorithm); // order by descending
-    },
-
+    }
 };
 
 const getComponentAlgorithm = (path: string) => {
@@ -105,6 +112,37 @@ const getComponentFromRoute = (path = window.location.pathname): RouteMatcher | 
     return result;
 }
 
+const getComponentFromName = (routeName: string): RouteMatcher | undefined => {
+    let result = pathNameDictionary[routeName];
+    return result;
+}
+/**
+ * Generate a path with params interpolated, if some path param is not present they will be replaced with empty string,
+ * this function does not validate regex params, it just interpolates the values.
+ * @param route the route generated from Router
+ * @param params the dictionary of path params
+ * @returns returns a string with the full path with interpolated params
+ */
+const setRouteParams = (route: RouteMatcher, params: StringDictionary): string => {
+    let result = route._fullpath;
+    Object.keys(params).forEach((key) => {
+        if (params[key]) {
+            const namedParam = route.params.find(e => e.name === key);
+            if (namedParam) {
+                const regex = new RegExp(
+                    namedParam.type !== "any" ?
+                        `:${key}[(]${namedParam.type}[)](?=$|/)` : // creates :id(number) match
+                        `:${key}(?=$|/)` // creates :id match
+                );
+                result = result.replace(regex, params[key])
+            }
+        }
+    });
+    result = result.replace(/:[\w\-][a-z0-9]+([(][\w\-][a-z0-9]+[)])?/g, ""); // remove all params not set
+    
+    return result;
+}
+
 export default pathMatchPattern;
 
 export {
@@ -112,5 +150,7 @@ export {
     generateMatcher,
     registerPathTypeParameter,
     getComponentFromRoute,
-    getParamsValues
+    getParamsValues,
+    getComponentFromName,
+    setRouteParams
 };
