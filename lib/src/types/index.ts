@@ -2,8 +2,12 @@ import React from "react";
 
 type Routes = Route[];
 
-export interface Route extends RouteBase {
-    children?: Routes
+export interface Route {
+    children?: Routes;
+    path: string;
+    name?: string;
+    component: JSX.Element;
+    priority?: number;
 }
 
 export interface TypeParameterDictionary {
@@ -16,8 +20,10 @@ export interface MatchersDictionary {
 
 export interface RouteBase {
     path: string;
+    name: string;
     component: JSX.Element,
     priority?: number,
+    _fullpath: string;
     params?: {
         name: string,
         type: string,

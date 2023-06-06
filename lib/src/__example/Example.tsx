@@ -45,6 +45,7 @@ const myRoutes = [{
     path: "rota/teste"
 }, {
     component: <Regex3></Regex3>,
+    name: "product-details",
     path: "product/:test(guid)"
 }] as Routes;
 

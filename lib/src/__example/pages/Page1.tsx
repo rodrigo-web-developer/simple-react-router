@@ -2,6 +2,7 @@ import React from "react";
 import Link from "../../components/Link";
 
 export default function MyFirstPage() {
+    console.log("rendering MyFirstPage");
     return (<>
         <h1>
             HEY, THIS IS MY 1st PAGE

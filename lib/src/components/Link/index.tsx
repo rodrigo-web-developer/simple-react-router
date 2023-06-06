@@ -1,13 +1,19 @@
 import React, { PropsWithChildren } from "react"
 import { useNavigation } from "../../hooks";
 
-interface LinkProps extends PropsWithChildren {
+interface LinkToProps extends PropsWithChildren {
     to: string;
 }
 
-export default function Link({ to, children }: LinkProps) {
+interface LinkRouteProps extends PropsWithChildren {
+    toRoute: string;
+}
+
+type LinkProps = LinkToProps;// | LinkRouteProps;
+
+export default function Link(params: LinkProps) {
     const navigator = useNavigation();
-    return (<a href={to} onClick={(e) => navigator.navigateTo(e, to)}>
-        {children}
+    return (<a href={params.to} onClick={(e) => navigator.navigateTo(e, params.to)}>
+        {params.children}
     </a>)
 }

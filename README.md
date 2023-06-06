@@ -1,4 +1,4 @@
-# simple-react-router
+# simple-react-routing
 
 ## Introduction
 
@@ -10,10 +10,10 @@ So I decide to make my own router with simple and easy to use components, easy c
 
 ## Features to release
 
-- [ ] Conditional Component Rendering by Route
-- [ ] URL path parameters
-- [ ] Regex parameters validation
-- [ ] Custom 404 error page
-- [ ] Nested routing
-- [ ] Navigation functions and components
-- [ ] Location changed custom events
+- [x] Conditional Component Rendering by Route
+- [x] URL path parameters
+- [x] Regex parameters validation
+- [x] Custom 404 error page
+- [x] Nested routing
+- [x] Navigation functions and components
+- [x] Location changed custom events

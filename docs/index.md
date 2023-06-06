@@ -1,4 +1,4 @@
-# SIMPLE REACT ROUTER
+# SIMPLE REACT ROUTING
 
 ## Overview
 
@@ -32,7 +32,7 @@ export default myRoutes;
 Add the following instruction to the root of your project or the root of your component routing:
 
 ```ts
-import { BrowserRouter, RenderComponent } from "simple-react-router";
+import { BrowserRouter, RenderComponent } from "simple-react-routing";
 
 import myRoutes from "./routes";
 
@@ -61,7 +61,7 @@ To create you own type RegExp validation you need to register at the root of you
 Imagine you want to add a GUID (with hiphen) validation:
 
 ```ts
-import { registerPathTypeParameter } from "simple-react-router";
+import { registerPathTypeParameter } from "simple-react-routing";
 
 registerPathTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);
 
@@ -89,7 +89,7 @@ The Simple React Router will not magically resolves the conflicts because there 
 So lets the developer decides for the library:
 
 ```ts
-import { registerPathTypeParameter } from "simple-react-router";
+import { registerPathTypeParameter } from "simple-react-routing";
 
 registerPathTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);
 
@@ -117,7 +117,7 @@ Use the `useRouter()` hook to get data of the current route like: component, pat
 Imagine you have the `/route/:id` route and you want to get the `id` parameter value, you can just call the hook and use the `pathParams` attribute:
 
 ```ts
-import { useRouter } from "simple-react-router";
+import { useRouter } from "simple-react-routing";
 
 export default function MyThirdPage() {
     const {pathParams} = useRouter();
@@ -136,7 +136,7 @@ There is only 1 component you need to use to render the specific component from 
 Being the App.tsx:
 
 ```ts
-import { BrowserRouter } from "simple-react-router";
+import { BrowserRouter } from "simple-react-routing";
 
 import { Layout } from "./pages";
 
@@ -155,7 +155,7 @@ And the Layout.tsx can be like:
 
 ```ts
 import React from "react";
-import { RenderComponent, Link } from "simple-react-router";
+import { RenderComponent, Link } from "simple-react-routing";
 
 export default function Layout() {
     return (<div className="layout">

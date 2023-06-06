@@ -1,11 +1,17 @@
 {
-  "name": "simple-react-router",
+  "name": "simple-react-routing",
+  "description": "A lightweight and easy to use ReactJS router",
   "author": {
-    "email": "rodrigo.050198@hotmail.com",
+    "email": "x10rodrigo@gmail.com",
     "name": "Rodrigo G Rodrigues",
     "url": "https://github.com/rodrigo-web-developer/"
   },
-  "version": "0.0.1-beta",
+  "repository": {
+    "url": "https://github.com/rodrigo-web-developer/simple-react-router",
+    "type": "GitHub",
+    "directory": "lib"
+  },
+  "version": "0.0.4",
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -37,5 +43,11 @@
     "ts-jest": "^29.0.5",
     "typescript": "^4.9.3",
     "vite": "^4.2.0"
-  }
+  },
+  "keywords": [
+    "react",
+    "router",
+    "routing",
+    "react-router"
+  ]
 }
