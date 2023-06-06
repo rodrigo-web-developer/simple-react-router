@@ -9,9 +9,13 @@ export default function Layout() {
     const navigator = useNavigation();
 
     const redirectToProduct = useCallback((e) => {
-        navigator.navigateToRoute(e, "product-details", {
-            "test": "ef4c3e47-f747-43ef-8962-1557caa5f8fa"
-        });
+        navigator.navigateToRoute(e, "product-details",
+            {
+                "test": "ef4c3e47-f747-43ef-8962-1557caa5f8fa"
+            }, {
+                id: "teste"
+            }
+        );
     }, [navigator]);
 
     return (<div className="layout">

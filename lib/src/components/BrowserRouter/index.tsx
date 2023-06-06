@@ -17,12 +17,12 @@ function Navigator({ children }: PropsWithChildren) {
         setPath(navigationService.pathname);
     });
 
-    const navigateTo = useCallback((event: UIEvent<Element>, relativePath: string, searchParams: any = null) => {
-        navigationService.navigateTo(event, relativePath, searchParams);
+    const navigateTo = useCallback((event: UIEvent<Element>, relativePath: string, state: any = null) => {
+        navigationService.navigateTo(event, relativePath, state);
     }, [path]);
 
-    const navigateToRoute = useCallback((e: React.UIEvent<Element>, routeName: string, routeParams?: StringDictionary, searchParams: any = null) => {
-        navigationService.navigateToRoute(e, routeName, routeParams, searchParams);
+    const navigateToRoute = useCallback((e: React.UIEvent<Element>, routeName: string, routeParams?: StringDictionary, state: any = null) => {
+        navigationService.navigateToRoute(e, routeName, routeParams, state);
     }, [path]);
 
     return <NavigationContext.Provider value={{

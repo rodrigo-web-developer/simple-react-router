@@ -7,15 +7,15 @@ const navigationService = {
     get pathname() {
         return window.location.pathname;
     },
-    navigateTo: function (event: UIEvent<Element>, path: string, searchParams: any = null) {
+    navigateTo: function (event: UIEvent<Element>, path: string, state: any = null) {
         event && event.preventDefault(); // impede que a tag "a" ao ser clicada redirecione a pagina
-        window.history.pushState(searchParams, "", path); // troco apenas a url sem redirecionar
+        window.history.pushState(state, "", path); // troco apenas a url sem redirecionar
         navigationService.handleOnChange(event);
     },
-    navigateToRoute: function (event: UIEvent<Element>, routeName: string, routeParams: StringDictionary, searchParams: any = null) {
+    navigateToRoute: function (event: UIEvent<Element>, routeName: string, routeParams: StringDictionary, state: any = null) {
         const route = getComponentFromName(routeName);
         const fullpath = setRouteParams(route, routeParams);
-        this.navigateTo(event, fullpath, searchParams);
+        this.navigateTo(event, fullpath, state);
     },
     onChangeRoute: function (handlerName: string, action: Function) {
         this._listeners[handlerName] = action;
