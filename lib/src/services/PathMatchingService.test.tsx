@@ -1,5 +1,5 @@
 import React from "react";
-import service, { generateMatcher, getComponentFromRoute, getParams, getParamsValues, registerPathTypeParameter } from "./PathMatchingService";
+import service, { generateMatcher, getComponentFromName, getComponentFromRoute, getParams, getParamsValues, registerPathTypeParameter, setRouteParams } from "./PathMatchingService";
 
 it("must create correct object with routes", () => {
     const component1 = <h1>TEST</h1>;
@@ -134,7 +134,7 @@ it("should return dictionary of params values with nested routes", () => {
     service.configure(nestedRoutes);
 
     const result1 = getComponentFromRoute("/nested/route");
-    
+
     expect(result1!.params).toEqual([{
         name: "path",
         type: "any",
@@ -152,3 +152,86 @@ it("should return dictionary of params values with nested routes", () => {
         "id": "route"
     });
 });
+
+
+it("should return route URL with params set", () => {
+    const component1 = <h1>1</h1>;
+    const component3 = <h3>2</h3>;
+    const nestedRoutes = [{
+        path: ":path",
+        component: component1,
+        children: [{
+            path: ":id",
+            name: "testparams",
+            component: component3
+        }]
+    }];
+
+    service.configure(nestedRoutes);
+
+    const route = getComponentFromName("testparams");
+
+    const url1 = setRouteParams(route, {
+        "path": "nested",
+        "id": "route"
+    });
+
+    const url2 = setRouteParams(route, {
+        "path": "nested"
+    });
+
+    expect(url1).toBe("/nested/route");
+    expect(url2).toBe("/nested/");
+});
+
+
+it("should return route URL with typed params set", () => {
+    const component1 = <h1>1</h1>;
+    const component3 = <h3>2</h3>;
+    const nestedRoutes = [{
+        path: ":path",
+        component: component1,
+        children: [{
+            path: ":id(numero)",
+            name: "testparams",
+            component: component3
+        }]
+    }];
+
+    registerPathTypeParameter("numero", /[0-9]+/)
+
+    service.configure(nestedRoutes);
+
+    const route = getComponentFromName("testparams");
+
+    const url1 = setRouteParams(route, {
+        "path": "nested",
+        "id": "route"
+    });
+
+    const url2 = setRouteParams(route, {
+        "path": "nested"
+    });
+
+    expect(url1).toBe("/nested/route");
+    expect(url2).toBe("/nested/");
+});
+
+
+it("does not allow user to set duplicated route names", () => {
+    const component1 = <h1>1</h1>;
+    const nestedRoutes = [{
+        path: ":path",
+        name: "test",
+        component: component1,
+    }, {
+        path: "testing",
+        name: "test",
+        component: component1,
+    }];
+
+    const wrap = () => service.configure(nestedRoutes);
+
+    expect(wrap).toThrow("You already defined a route with the same name: test");
+});
+
