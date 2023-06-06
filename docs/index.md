@@ -205,7 +205,7 @@ const myRoutes = [{
 export default myRoutes;
 ```
 
-Which will identify the routes by name, so you can call the `navigateToRoute` function from `useNavigator()` hook:
+Which will identify the routes by name, so you can call the `navigateToRoute` function from `useNavigation()` hook:
 
 ```tsx
 import { useNavigation } from "simple-react-routing";
