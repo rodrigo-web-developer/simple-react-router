@@ -203,7 +203,7 @@ it("should return route URL with typed params set", () => {
     service.configure(nestedRoutes);
 
     const route = getComponentFromName("testparams");
-    
+
     const url1 = setRouteParams(route, {
         "path": "nested",
         "id": "route"
@@ -215,5 +215,23 @@ it("should return route URL with typed params set", () => {
 
     expect(url1).toBe("/nested/route");
     expect(url2).toBe("/nested/");
+});
+
+
+it("does not allow user to set duplicated route names", () => {
+    const component1 = <h1>1</h1>;
+    const nestedRoutes = [{
+        path: ":path",
+        name: "test",
+        component: component1,
+    }, {
+        path: "testing",
+        name: "test",
+        component: component1,
+    }];
+
+    const wrap = () => service.configure(nestedRoutes);
+
+    expect(wrap).toThrow("You already defined a route with the same name: test");
 });
 
