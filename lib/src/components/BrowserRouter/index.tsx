@@ -2,7 +2,7 @@ import { PropsWithChildren, ReactNode, UIEvent, useCallback, useEffect, useState
 import { RouterContext, NavigationContext } from "../../contexts";
 import { useNavigation, useRouter } from "../../hooks";
 import navigationService from "../../services/NavigationService";
-import service, { getComponentFromRoute, getParamsValues } from "../../services/PathMatchingService";
+import service, { getComponentFromRoute, getParamsValues, setRouteParams } from "../../services/PathMatchingService";
 import { RouteMatcher, Routes, StringDictionary } from "../../types";
 
 interface BrowserRouterProps extends PropsWithChildren {
@@ -17,12 +17,17 @@ function Navigator({ children }: PropsWithChildren) {
         setPath(navigationService.pathname);
     });
 
-    const navigateTo = useCallback((event: UIEvent<Element>, relativePath: string) => {
-        navigationService.navigateTo(event, relativePath);
+    const navigateTo = useCallback((event: UIEvent<Element>, relativePath: string, searchParams: any = null) => {
+        navigationService.navigateTo(event, relativePath, searchParams);
+    }, [path]);
+
+    const navigateToRoute = useCallback((e: React.UIEvent<Element>, routeName: string, routeParams?: StringDictionary, searchParams: any = null) => {
+        navigationService.navigateToRoute(e, routeName, routeParams, searchParams);
     }, [path]);
 
     return <NavigationContext.Provider value={{
         navigateTo,
+        navigateToRoute,
         path
     }}>
         {children}
@@ -38,7 +43,7 @@ export default function BrowserRouter({ routes, notFoundPage, children }: Browse
 }
 
 function BrowserRouterWrapper({ routes, notFoundPage, children }: BrowserRouterProps) {
-    const [component, setComponent] = useState<React.ReactElement | JSX.Element | ReactNode | React.FC >();
+    const [component, setComponent] = useState<React.ReactElement | JSX.Element | ReactNode | React.FC>();
     const [currentRoute, setCurrentRoute] = useState<RouteMatcher>();
     const [pathParams, setPathParams] = useState<StringDictionary>({});
 
