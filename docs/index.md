@@ -174,3 +174,59 @@ export default function Layout() {
 ```
 
 where &lt;RenderComponent/&gt; is the component which will render based on router definition.
+
+
+## Named Route navigation
+
+You can name your routes to more flexible development. So you dont need to explicit pass the full path to navigate through routes. You can identify the route with a unique name, so it creates a better maintainable application (if some route changes, it wouldn't be need to change all navigation that relays on that route).
+
+To name your route just pass the name attribute
+
+```ts
+import { registerPathTypeParameter } from "simple-react-routing";
+
+registerPathTypeParameter("guid", /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9A-Fa-f]{4}-[0-9a-f]{12}/);
+
+const myRoutes = [{
+    component: <Page1></Page1>,
+    path: "page1",
+    name: "main-page",
+    children: [{
+        path: "subpage", //it creates: /page1/subpage
+        component: <Subpage1></Subpage1>,
+        name: "first-page",
+    }]
+}, {
+    component: <Page3></Page3>,
+    path: "product/:id(guid)", // use the name of type parameter registered
+    name: "product-details"
+}] as Routes;
+
+export default myRoutes;
+```
+
+Which will identify the routes by name, so you can call the `navigateToRoute` function from `useNavigator()` hook:
+
+```tsx
+import { useNavigation } from "simple-react-routing";
+
+export default function MyComponent() {
+    const navigator = useNavigation();
+
+    const redirectToMainPage = useCallback((e) => {
+        navigator.navigateToRoute(e, "main-page");
+    }, [navigator]);
+
+    const redirectToProduct = useCallback((e) => {
+        navigator.navigateToRoute(e, "product-details",
+        {
+            "id": "ef4c3e47-f747-43ef-8962-1557caa5f8fa"
+        });
+    }, [navigator]);
+
+    return (<div className="my-page">
+            <a href="" onClick={(e) => redirectToMainPage(e)}>Go to Home</a>
+            <a href="" onClick={(e) => redirectToProduct(e)}>Check Product Details</a>
+    </div>);
+}
+```
