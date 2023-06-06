@@ -2,6 +2,7 @@ import { useRouter } from "../../hooks";
 import React from "react"
 
 export default function MySecondPage() {
+    console.log("rendering Regex1");
     const { pathParams } = useRouter();
 
     return (<>

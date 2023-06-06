@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import Link from "../../components/Link";
 import "../styles/app.css";
 import { RenderComponent } from "../../components/BrowserRouter";
-import { getComponentFromName, getComponentFromRoute } from "../../services/PathMatchingService";
 import { useNavigation } from "../../hooks";
 
 export default function Layout() {
@@ -13,7 +12,7 @@ export default function Layout() {
             {
                 "test": "ef4c3e47-f747-43ef-8962-1557caa5f8fa"
             }, {
-                id: "teste"
+                id: "teste" 
             }
         );
     }, [navigator]);
