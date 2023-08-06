@@ -17,3 +17,6 @@ So I decide to make my own router with simple and easy to use components, easy c
 - [x] Nested routing
 - [x] Navigation functions and components
 - [x] Location changed custom events
+
+
+[See the docs](https://github.com/rodrigo-web-developer/simple-react-router/blob/main/docs/index.md)
