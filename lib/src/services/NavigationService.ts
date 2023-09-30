@@ -15,7 +15,7 @@ const navigationService = {
     navigateToRoute: function (event: UIEvent<Element> | null, routeName: string, routeParams: StringDictionary, state: any = null) {
         const route = getComponentFromName(routeName);
         const fullpath = setRouteParams(route, routeParams);
-        this.navigateTo(null, fullpath, state);
+        this.navigateTo(event, fullpath, state);
     },
     onChangeRoute: function (handlerName: string, action: Function) {
         this._listeners[handlerName] = action;
