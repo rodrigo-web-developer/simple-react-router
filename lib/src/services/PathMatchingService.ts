@@ -86,6 +86,7 @@ const pathMatchPattern = {
                 component: route.component,
                 name: route.name,
                 path: route.path,
+                config: route,
                 type: classifyPath(fullPath),
                 priority: route.priority || 0,
                 matcher: generateMatcher(fullPath),

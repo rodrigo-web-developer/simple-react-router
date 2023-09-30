@@ -235,3 +235,19 @@ it("does not allow user to set duplicated route names", () => {
     expect(wrap).toThrow("You already defined a route with the same name: test");
 });
 
+
+
+it("should return route original object", () => {
+    const component1 = <h1>1</h1>;
+    const nestedRoutes = [{
+        path: "initial",
+        name: "initial",
+        component: component1
+    }];
+
+    service.configure(nestedRoutes);
+
+    const route = getComponentFromName("initial");
+
+    expect(route.config).toEqual(nestedRoutes[0]);
+});

@@ -24,6 +24,7 @@ export interface RouteBase {
     component: JSX.Element,
     priority?: number,
     _fullpath: string;
+    config: Route;
     params?: {
         name: string,
         type: string,
