@@ -1,6 +1,7 @@
 {
   "name": "simple-react-routing",
   "description": "A lightweight and easy to use ReactJS router",
+  "license": "MIT",
   "author": {
     "email": "x10rodrigo@gmail.com",
     "name": "Rodrigo G Rodrigues",
