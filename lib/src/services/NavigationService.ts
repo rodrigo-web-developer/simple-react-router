@@ -1,6 +1,6 @@
 import { UIEvent } from "react";
 import { StringDictionary } from "types";
-import { getComponentFromName, setRouteParams, } from "./PathMatchingService";
+import { getFullPath } from "./PathMatchingService";
 
 const navigationService = {
     _listeners: {} as any,
@@ -13,8 +13,7 @@ const navigationService = {
         navigationService.handleOnChange(event);
     },
     navigateToRoute: function (event: UIEvent<Element> | null, routeName: string, routeParams: StringDictionary, state: any = null) {
-        const route = getComponentFromName(routeName);
-        const fullpath = setRouteParams(route, routeParams);
+        const fullpath = getFullPath(routeName, routeParams);
         this.navigateTo(event, fullpath, state);
     },
     onChangeRoute: function (handlerName: string, action: Function) {

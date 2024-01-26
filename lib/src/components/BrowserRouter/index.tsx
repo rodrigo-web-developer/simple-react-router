@@ -2,7 +2,7 @@ import { PropsWithChildren, ReactNode, UIEvent, useCallback, useEffect, useState
 import { RouterContext, NavigationContext } from "../../contexts";
 import { useNavigation, useRouter } from "../../hooks";
 import navigationService from "../../services/NavigationService";
-import service, { getComponentFromRoute, getParamsValues, setRouteParams } from "../../services/PathMatchingService";
+import service, { getComponentFromRoute, getParamsValues, getPathWithParams } from "../../services/PathMatchingService";
 import { RouteMatcher, Routes, StringDictionary } from "../../types";
 
 interface BrowserRouterProps extends PropsWithChildren {

@@ -1,5 +1,5 @@
 import React from "react";
-import service, { generateMatcher, getComponentFromName, getComponentFromRoute, getParams, getParamsValues, registerPathTypeParameter, setRouteParams } from "./PathMatchingService";
+import service, { generateMatcher, getComponentFromName, getComponentFromRoute, getParams, getParamsValues, registerPathTypeParameter, getPathWithParams } from "./PathMatchingService";
 
 it("must create correct object with routes", () => {
     const component1 = <h1>TEST</h1>;
@@ -171,12 +171,12 @@ it("should return route URL with params set", () => {
 
     const route = getComponentFromName("testparams");
 
-    const url1 = setRouteParams(route, {
+    const url1 = getPathWithParams(route, {
         "path": "nested",
         "id": "route"
     });
 
-    const url2 = setRouteParams(route, {
+    const url2 = getPathWithParams(route, {
         "path": "nested"
     });
 
@@ -204,12 +204,12 @@ it("should return route URL with typed params set", () => {
 
     const route = getComponentFromName("testparams");
 
-    const url1 = setRouteParams(route, {
+    const url1 = getPathWithParams(route, {
         "path": "nested",
         "id": "route"
     });
 
-    const url2 = setRouteParams(route, {
+    const url2 = getPathWithParams(route, {
         "path": "nested"
     });
 

@@ -117,6 +117,12 @@ const getComponentFromName = (routeName: string): RouteMatcher | undefined => {
     let result = pathNameDictionary[routeName];
     return result;
 }
+
+const getFullPath = (routeName: string, routeParams: StringDictionary) => {
+    const route = getComponentFromName(routeName);
+    const fullpath = getPathWithParams(route, routeParams);
+    return fullpath;
+}
 /**
  * Generate a path with params interpolated, if some path param is not present they will be replaced with empty string,
  * this function does not validate regex params, it just interpolates the values.
@@ -124,7 +130,7 @@ const getComponentFromName = (routeName: string): RouteMatcher | undefined => {
  * @param params the dictionary of path params
  * @returns returns a string with the full path with interpolated params
  */
-const setRouteParams = (route: RouteMatcher, params: StringDictionary): string => {
+const getPathWithParams = (route: RouteMatcher, params: StringDictionary): string => {
     let result = route._fullpath;
     Object.keys(params).forEach((key) => {
         if (params[key]) {
@@ -140,7 +146,7 @@ const setRouteParams = (route: RouteMatcher, params: StringDictionary): string =
         }
     });
     result = result.replace(/:[\w\-][a-z0-9]+([(][\w\-][a-z0-9]+[)])?/g, ""); // remove all params not set
-    
+
     return result;
 }
 
@@ -153,5 +159,6 @@ export {
     getComponentFromRoute,
     getParamsValues,
     getComponentFromName,
-    setRouteParams
+    getPathWithParams,
+    getFullPath
 };
