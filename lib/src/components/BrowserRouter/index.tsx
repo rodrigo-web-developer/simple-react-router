@@ -46,6 +46,7 @@ function BrowserRouterWrapper({ routes, notFoundPage, children }: BrowserRouterP
     const [component, setComponent] = useState<React.ReactElement | JSX.Element | ReactNode | React.FC>();
     const [currentRoute, setCurrentRoute] = useState<RouteMatcher>();
     const [pathParams, setPathParams] = useState<StringDictionary>({});
+    const [configured, setConfigured] = useState<boolean>();
 
     const navigator = useNavigation();
 
@@ -64,6 +65,7 @@ function BrowserRouterWrapper({ routes, notFoundPage, children }: BrowserRouterP
 
     useEffect(() => {
         service.configure(routes);
+        setConfigured(true);
     }, [routes]);
 
     useEffect(() => {
@@ -75,7 +77,7 @@ function BrowserRouterWrapper({ routes, notFoundPage, children }: BrowserRouterP
         component,
         pathParams
     }}>
-        {children}
+        {configured && children}
     </RouterContext.Provider>);
 }
 

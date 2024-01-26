@@ -39,6 +39,7 @@ const myRoutes = [{
 }, {
     component: <Regex2></Regex2>,
     path: "rota/:id(number)",
+    name: "rota-id",
     priority: 1
 }, {
     component: <Regex3></Regex3>,

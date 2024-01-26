@@ -3,10 +3,13 @@ import Link from "../../components/Link";
 import "../styles/app.css";
 import { RenderComponent } from "../../components/BrowserRouter";
 import { useNavigation } from "../../hooks";
+import { getFullPath } from "../../services/PathMatchingService";
 
 export default function Layout() {
     const navigator = useNavigation();
-
+    const rota2 = getFullPath("rota-id", {
+        id: "12346"
+    })
     const redirectToProduct = useCallback((e) => {
         navigator.navigateToRoute(e, "product-details",
             {
@@ -24,7 +27,7 @@ export default function Layout() {
                 <li><Link to="/pagina2">IR PARA PAGINA 2</Link></li>
                 <li><Link to="/pagina3">IR PARA PAGINA 3</Link></li>
                 <li><Link to="/rota/textonormal">PAGINA COM REGEX</Link></li>
-                <li><Link to="/rota/123456">PAGINA COM REGEX</Link></li>
+                <li><Link to={rota2}>PAGINA COM REGEX</Link></li>
                 <li><Link to="/rota/teste">PAGINA SEM REGEX</Link></li>
                 <li><Link to="/404">PAGINA SEM REGISTRO</Link></li>
                 <li><a href="" onClick={(e) => redirectToProduct(e)}>PAGINA REGEX TIPO GUID</a></li>
