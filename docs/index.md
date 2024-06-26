@@ -203,7 +203,15 @@ export default function Layout() {
 where &lt;RenderComponent/&gt; is the component which will render based on router definition.
 
 ## Link component
-Link component creates a
+Link component creates an anchor element with all specific attributes, it make easy to create navigation anchors without creating your own component.
+
+```jsx
+<Link to="/my-route">Click here</Link>
+```
+
+It generates an anchor element with href being your target destination and provides default onclick behavior.
+
+You can pass any anchor's attribute like `className`, `id` etc.
 
 
 ## Named Route navigation
