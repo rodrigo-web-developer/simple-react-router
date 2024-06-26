@@ -48,6 +48,33 @@ export default function Example() {
 
 BrowserRouter will create a context for routing, and you can easily access and navigate to routes using the `useRouter()` hook inside any component directly or not directly child of BrowserRouter node.
 
+## Navigation
+You can use navigation functions by calling `useNavigation()` hook, it allows you to pass the dispatched event and the destination location:
+
+```ts
+import { useNavigation } from "simple-react-routing";
+
+export default function MyPage() {
+
+    const { navigateTo } = useNavigation();
+
+    const goToAnotherPage = (e) => {
+        navigateTo(e, "/another-page");
+    }
+
+    return (
+        <div>
+            <h1>My page</h1>
+            <button onClick={goToAnotherPage}>Go to Page</button>
+        </div>
+    )
+}
+```
+
+If you don't have an event object, you can pass null.
+
+**Important:** The hook `useNavigation()` depends on BrowserRouter context, so it can only be used inside \<BrowserRouter/\>
+
 ## RegExp Params
 
 It is a common concept use RegExp validation on path to not allow users to entry an invalid location, or even to just automatically returns a NotFoundPage based on the validation.
@@ -174,6 +201,9 @@ export default function Layout() {
 ```
 
 where &lt;RenderComponent/&gt; is the component which will render based on router definition.
+
+## Link component
+Link component creates a
 
 
 ## Named Route navigation
