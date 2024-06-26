@@ -49,7 +49,7 @@ export default function Example() {
 BrowserRouter will create a context for routing, and you can easily access and navigate to routes using the `useRouter()` hook inside any component directly or not directly child of BrowserRouter node.
 
 ## Navigation
-You can use navigation functions by calling `useNavigation()` hook, it allows you to pass the dispatched event and the destination location:
+You can use navigation functions by calling `useNavigation()` hook, it allows you to pass the dispatched event and the target location:
 
 ```ts
 import { useNavigation } from "simple-react-routing";
