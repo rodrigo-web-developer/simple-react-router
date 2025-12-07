@@ -2,11 +2,11 @@
 
 ## Introduction
 
-The idea behind this project is to offer a simple way to create a router in React.js, using basic concepts like URL's path matching, conditional rendering and window Location events.
+**simple-react-routing** is a lightweight, dependency-free routing library designed for building Single Page Applications (SPAs) in React.js. It provides developers with a straightforward, intuitive solution for client-side routing without the complexity and breaking changes often associated with larger third-party routing libraries.
 
-As a developer I had a lot of issues with third party libraries that always releases breaking change, parameters mismatches upgrades and undesireable stuff that breaks a simple website build after an "yarn/npm start" command.
+The library leverages fundamental web concepts—URL path matching, conditional component rendering, and browser location events—to deliver a robust routing system that's easy to understand and customize. Whether you're building a small personal project or a professional SPA, simple-react-routing offers clean APIs and flexible configuration options that put you in control.
 
-So I decide to make my own router with simple and easy to use components, easy configuration to URL pattern matching and other cool stuff that I want to use in my personal and professional projects.
+Frustrated with constantly breaking updates and unnecessarily complex APIs from mainstream routing solutions, this project was created to provide a stable, predictable alternative that just works and doesn't require a major rewrite after upgrading.
 
 ## Features to release
 
