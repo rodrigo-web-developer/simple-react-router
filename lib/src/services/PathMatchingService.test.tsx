@@ -1,4 +1,3 @@
-import React from "react";
 import service, { generateMatcher, getComponentFromName, getComponentFromRoute, getParams, getParamsValues, registerPathTypeParameter, getPathWithParams } from "./PathMatchingService";
 
 it("must create correct object with routes", () => {

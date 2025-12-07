@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode, createContext } from "react";
+import React, { ReactNode, createContext } from "react";
 import { Routes, StringDictionary } from "../types";
 
 interface RouterContext {
