@@ -1,5 +1,7 @@
 # simple-react-routing
 
+[![npm version](https://img.shields.io/npm/v/simple-react-routing.svg)](https://www.npmjs.com/package/simple-react-routing)
+
 ## Introduction
 
 **simple-react-routing** is a lightweight, dependency-free routing library designed for building Single Page Applications (SPAs) in React.js. It provides developers with a straightforward, intuitive solution for client-side routing without the complexity and breaking changes often associated with larger third-party routing libraries.
