@@ -8,7 +8,17 @@ const navigationService = {
         return window.location.pathname;
     },
     navigateTo: function (event: UIEvent<Element> | null, path: string, state: any = null) {
-        event && event.preventDefault(); // impede que a tag "a" ao ser clicada redirecione a pagina
+        if (event) {
+            // If user is holding Ctrl (or Meta on macOS), keep default behavior (open in new tab/window)
+            const hasCtrl = 'ctrlKey' in event && (event as any).ctrlKey;
+            const hasMeta = 'metaKey' in event && (event as any).metaKey;
+            if (hasCtrl || hasMeta) {
+                return;
+            }
+
+            event.preventDefault(); // impede que a tag "a" ao ser clicada redirecione a pagina
+        }
+
         window.history.pushState(state, "", path); // troco apenas a url sem redirecionar
         navigationService.handleOnChange(event);
     },
